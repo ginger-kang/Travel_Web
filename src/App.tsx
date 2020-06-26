@@ -1,9 +1,20 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import styled from "styled-components";
+import Router from "./Router";
+import { GlobalStyle } from "./global-styles";
+
+const AppContainer = styled.section`
+  width: 100%;
+  height: 100vh;
+`;
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <AppContainer>
+      <GlobalStyle />
+      <Router />
+    </AppContainer>
+  );
 }
 
 export default App;
