@@ -8,19 +8,26 @@ const TravelContainer = styled.section`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 `;
 
 const SideCityNav = styled.aside`
   width: 20%;
+  min-width: 200px;
   height: 100vh;
-  background: red;
+  background: #fe3528;
+`;
+
+const TravelPhotoContainer = styled.section`
+  width: 80%;
+  height: 100%;
+  background: #000000;
 `;
 
 function Travel() {
   return (
     <TravelContainer>
       <SideCityNav></SideCityNav>
+      <TravelPhotoContainer></TravelPhotoContainer>
     </TravelContainer>
   );
 }
