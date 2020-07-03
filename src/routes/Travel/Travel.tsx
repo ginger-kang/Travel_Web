@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
 import { CITYS } from "./TravelQuery";
@@ -59,7 +59,21 @@ const PhotoContainer = styled.figure`
 `;
 
 function Travel() {
-  const [cityName, setCityName] = useState("tokyo");
+  const [cityName, setCityName] = useState<string>("tokyo");
+  const [cityIndex, setCityIndex] = useState<number>(0);
+
+  useEffect(() => {
+    cmsCityIndex();
+  });
+
+  const cmsCityIndex = () => {
+    if (cityName === "tokyo") {
+      setCityIndex(0);
+    } else if (cityName === "hokkaido") {
+      setCityIndex(1);
+    }
+  };
+
   return (
     <Query
       query={CITYS}
@@ -73,31 +87,33 @@ function Travel() {
         if (error) {
           return <div>error</div>;
         }
-        console.log(data);
+        console.log(cityIndex);
+        const tokyoData = data.citys[cityIndex].photo;
         return (
-          <div style={{ width: "200px", height: "200px" }}>
-            {data.citys[0].photo[0].url}
-          </div>
+          <TravelContainer>
+            <TravelNav city={cityName}>
+              <button
+                onClick={() => setCityName("hokkaido")}
+                style={{ width: "50px", height: "50px", background: "black" }}
+              >
+                도시선택
+              </button>
+            </TravelNav>
+            <TravelPhotoContainer>
+              <GridWrapper>
+                {tokyoData &&
+                  tokyoData.map((photo: any) => (
+                    <PhotoContainer key={photo.id}>
+                      <img src={photo.url} alt="tokyo" />
+                    </PhotoContainer>
+                  ))}
+              </GridWrapper>
+            </TravelPhotoContainer>
+          </TravelContainer>
         );
       }}
     </Query>
   );
-}
-
-{
-  // <TravelContainer>
-  //         <TravelNav city={cityName}>
-  //           <button
-  //             onClick={() => setCityName("hokkaido")}
-  //             style={{ width: "50px", height: "50px", background: "black" }}
-  //           >
-  //             도시선택
-  //           </button>
-  //         </TravelNav>
-  //         <TravelPhotoContainer>
-  //           <GridWrapper></GridWrapper>
-  //         </TravelPhotoContainer>
-  //       </TravelContainer>
 }
 
 export default Travel;
