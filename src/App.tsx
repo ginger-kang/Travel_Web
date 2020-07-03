@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Router from "./Router";
 import { GlobalStyle } from "./global-styles";
+import { ApolloProvider } from "react-apollo";
+import client from "./apollo";
 
 const AppContainer = styled.section`
   width: 100%;
@@ -9,10 +11,12 @@ const AppContainer = styled.section`
 
 function App() {
   return (
-    <AppContainer>
-      <GlobalStyle />
-      <Router />
-    </AppContainer>
+    <ApolloProvider client={client}>
+      <AppContainer>
+        <GlobalStyle />
+        <Router />
+      </AppContainer>
+    </ApolloProvider>
   );
 }
 
