@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 import { CITYS } from "./TravelQuery";
 import Loading from "../../components/LoadingPage";
+import CityList from "../../components/CityList";
 
 const TravelContainer = styled.section`
   width: 100%;
@@ -20,6 +21,7 @@ interface NavProps {
 const TravelCityNav = styled("nav")<NavProps>`
   width: 20%;
   height: 100vh;
+  min-width: 200px;
   position: fixed;
   top: 0;
   left: 0;
@@ -33,6 +35,12 @@ const TravelCityNav = styled("nav")<NavProps>`
       return "linear-gradient(45deg, #ffffff, #73b2ff)";
     }
   }};
+  overflow: auto;
+  @media screen and (max-width: 800px) {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+  }
 `;
 
 const TravelPhotoContainer = styled.main`
@@ -40,10 +48,17 @@ const TravelPhotoContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3.5vw;
+  margin-top: 1.5vw;
+  margin-left: 8px;
   position: absolute;
   top: 0;
-  left: 27.5%;
+  left: 25.5%;
+
+  @media screen and (max-width: 800px) {
+    position: unset;
+    left: 50%;
+    margin-top: 180px;
+  }
 `;
 
 const GridWrapper = styled.section`
@@ -56,8 +71,10 @@ const GridWrapper = styled.section`
 `;
 
 const PhotoContainer = styled.figure`
-  width: 21vw;
-  height: 21vw;
+  width: 22vw;
+  height: 22vw;
+  min-width: 140px;
+  min-height: 140px;
 
   & img {
     width: 100%;
@@ -101,17 +118,7 @@ function Travel() {
         return (
           <TravelContainer>
             <TravelCityNav city={cityName}>
-              <button
-                onClick={() => setCityName("hokkaido")}
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  background: "none",
-                  color: "white",
-                }}
-              >
-                TOKYO
-              </button>
+              <CityList />
             </TravelCityNav>
             <TravelPhotoContainer>
               <GridWrapper>
