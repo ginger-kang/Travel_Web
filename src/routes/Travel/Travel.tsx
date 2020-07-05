@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
 import { CITYS } from "./TravelQuery";
+import Loading from "../../components/LoadingPage";
 
 const TravelContainer = styled.section`
   width: 100%;
@@ -16,9 +17,12 @@ interface NavProps {
   city: string;
 }
 
-const TravelNav = styled("nav")<NavProps>`
-  width: 100%;
-  height: 50vh;
+const TravelCityNav = styled("nav")<NavProps>`
+  width: 20%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,6 +41,9 @@ const TravelPhotoContainer = styled.main`
   justify-content: center;
   align-items: center;
   margin-top: 3.5vw;
+  position: absolute;
+  top: 0;
+  left: 27.5%;
 `;
 
 const GridWrapper = styled.section`
@@ -49,8 +56,8 @@ const GridWrapper = styled.section`
 `;
 
 const PhotoContainer = styled.figure`
-  width: 300px;
-  height: 300px;
+  width: 21vw;
+  height: 21vw;
 
   & img {
     width: 100%;
@@ -71,6 +78,8 @@ function Travel() {
       setCityIndex(0);
     } else if (cityName === "hokkaido") {
       setCityIndex(1);
+    } else if (cityName === "osaka") {
+      setCityIndex(2);
     }
   };
 
@@ -82,7 +91,7 @@ function Travel() {
     >
       {({ loading, error, data }: any) => {
         if (loading) {
-          return <div>loading...</div>;
+          return <Loading />;
         }
         if (error) {
           return <div>error</div>;
@@ -91,14 +100,19 @@ function Travel() {
         const tokyoData = data.citys[cityIndex].photo;
         return (
           <TravelContainer>
-            <TravelNav city={cityName}>
+            <TravelCityNav city={cityName}>
               <button
                 onClick={() => setCityName("hokkaido")}
-                style={{ width: "50px", height: "50px", background: "black" }}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  background: "none",
+                  color: "white",
+                }}
               >
-                도시선택
+                TOKYO
               </button>
-            </TravelNav>
+            </TravelCityNav>
             <TravelPhotoContainer>
               <GridWrapper>
                 {tokyoData &&
