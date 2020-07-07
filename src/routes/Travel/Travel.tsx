@@ -12,6 +12,7 @@ const TravelContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 interface NavProps {
@@ -49,6 +50,7 @@ const TravelPhotoContainer = styled.main`
   position: absolute;
   top: 0;
   left: 25.5%;
+
   @media screen and (max-width: 800px) {
     position: unset;
     left: 50%;
@@ -70,20 +72,21 @@ const PhotoContainer = styled.figure`
   height: 22vw;
   min-width: 140px;
   min-height: 140px;
+
   & img {
     width: 100%;
     height: 100%;
   }
 `;
 
-const GettingPhotoButton = styled.button`
+const GetPhotoButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: rgba(0, 0, 0, 0.5);
   margin-top: 30px;
 `;
 
@@ -100,15 +103,17 @@ const GettingPhotoButton = styled.button`
 
 function Travel() {
   const [cityName, setCityName] = useState<string>("tokyo");
-  const [photoVariable, setPhotoVariable] = useState<number>(9);
+  const [photoVariable, setPhotoVariable] = useState<number>(6);
   const [cityIndex, setCityIndex] = useState<number>(0);
   // const [cityPhotos, setCityPhotos] = useState({});
 
-  const { loading, error, data } = useQuery(GET_CITYS);
+  const { loading, error, data } = useQuery(GET_CITYS, {
+    variables: { first: photoVariable },
+  });
 
   useEffect(() => {
     cmsCityIndex();
-  });
+  }, [cityName]);
 
   const cmsCityIndex = () => {
     if (cityName === "tokyo") {
@@ -117,6 +122,8 @@ function Travel() {
       setCityIndex(1);
     } else if (cityName === "osaka") {
       setCityIndex(2);
+    } else if (cityName === "kyoto") {
+      setCityIndex(3);
     }
   };
 
@@ -130,6 +137,7 @@ function Travel() {
 
   const handleChangeCity = (city: string) => {
     setCityName(city);
+    setPhotoVariable(6);
   };
 
   return (
@@ -146,6 +154,10 @@ function Travel() {
               </PhotoContainer>
             ))}
         </GridWrapper>
+        <GetPhotoButton
+          style={{ width: "50px", height: "50px", borderRadius: "100%" }}
+          onClick={() => setPhotoVariable(photoVariable + 6)}
+        ></GetPhotoButton>
       </TravelPhotoContainer>
     </TravelContainer>
   );

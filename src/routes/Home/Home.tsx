@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import main1 from "../../Images/HomeImage/main1.jpeg";
+import main from "../../Images/main.jpeg";
 
 const HomeContainer = styled.section`
   height: 100vh;
@@ -81,7 +81,7 @@ function Home() {
       <HomeImageContainer>
         <HomeImageTrailer>
           <img
-            src={main1}
+            src={main}
             alt="japan"
             style={{ width: "100%", height: "100%" }}
           />
