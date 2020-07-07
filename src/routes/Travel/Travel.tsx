@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
-import { CITYS } from "./TravelQuery";
+import { GET_CITYS } from "./TravelQuery";
+import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
 import CityList from "../../components/CityList";
 
@@ -28,14 +29,9 @@ const TravelCityNav = styled("nav")<NavProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${({ city }) => {
-    if (city === "tokyo") {
-      return "linear-gradient(45deg, #c1d4ff, #ff83e9)";
-    } else if (city === "hokkaido") {
-      return "linear-gradient(45deg, #ffffff, #73b2ff)";
-    }
-  }};
+  background: white;
   overflow: auto;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.1);
   @media screen and (max-width: 800px) {
     position: absolute;
     width: 100%;
@@ -46,6 +42,7 @@ const TravelCityNav = styled("nav")<NavProps>`
 const TravelPhotoContainer = styled.main`
   height: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 1.5vw;
@@ -82,9 +79,35 @@ const PhotoContainer = styled.figure`
   }
 `;
 
+const GettingPhotoButton = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  margin-top: 30px;
+`;
+
+// 사진 순서 셔플
+// let shuffledData: any = [];
+
+// const shuffleImageData = (a: any) => {
+//   for (let i = a.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [a[i], a[j]] = [a[j], a[i]];
+//   }
+//   return a;
+// };
+
 function Travel() {
   const [cityName, setCityName] = useState<string>("tokyo");
+  const [photoVariable, setPhotoVariable] = useState<number>(9);
   const [cityIndex, setCityIndex] = useState<number>(0);
+  // const [cityPhotos, setCityPhotos] = useState({});
+
+  const { loading, error, data } = useQuery(GET_CITYS);
 
   useEffect(() => {
     cmsCityIndex();
@@ -100,40 +123,34 @@ function Travel() {
     }
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <div>error</div>;
+  }
+  let cityPhotos: any = data.citys[cityIndex].photo;
+
+  const handleChangeCity = (city: string) => {
+    setCityName(city);
+  };
+
   return (
-    <Query
-      query={CITYS}
-      notifyOnNetworkStatusChange={true}
-      fetchPolicy={"cache-and-network"}
-    >
-      {({ loading, error, data }: any) => {
-        if (loading) {
-          return <Loading />;
-        }
-        if (error) {
-          return <div>error</div>;
-        }
-        console.log(cityIndex);
-        const tokyoData = data.citys[cityIndex].photo;
-        return (
-          <TravelContainer>
-            <TravelCityNav city={cityName}>
-              <CityList />
-            </TravelCityNav>
-            <TravelPhotoContainer>
-              <GridWrapper>
-                {tokyoData &&
-                  tokyoData.map((photo: any) => (
-                    <PhotoContainer key={photo.id}>
-                      <img src={photo.url} alt="tokyo" />
-                    </PhotoContainer>
-                  ))}
-              </GridWrapper>
-            </TravelPhotoContainer>
-          </TravelContainer>
-        );
-      }}
-    </Query>
+    <TravelContainer>
+      <TravelCityNav city={cityName}>
+        <CityList handleChangeCity={handleChangeCity} />
+      </TravelCityNav>
+      <TravelPhotoContainer>
+        <GridWrapper>
+          {cityPhotos &&
+            cityPhotos.map((photo: any) => (
+              <PhotoContainer key={photo.id}>
+                <img src={photo.url} alt="photo" />
+              </PhotoContainer>
+            ))}
+        </GridWrapper>
+      </TravelPhotoContainer>
+    </TravelContainer>
   );
 }
 

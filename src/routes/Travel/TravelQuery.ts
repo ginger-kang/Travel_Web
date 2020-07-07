@@ -1,10 +1,34 @@
 import { gql } from "apollo-boost";
 
-export const CITYS = gql`
+export const GET_CITYS = gql`
   query {
     citys {
       name
       photo {
+        id
+        url
+      }
+    }
+  }
+`;
+
+export const GET_CITY_HOME_IMAGE = gql`
+  query getCity($first: Int!) {
+    citys {
+      name
+      photo(first: $first) {
+        id
+        url
+      }
+    }
+  }
+`;
+
+export const GET_CITY_LIST = gql`
+  query getCityList($first: Int!) {
+    citys {
+      name
+      photo(first: $first) {
         id
         url
       }
