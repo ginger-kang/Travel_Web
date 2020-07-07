@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Query } from "react-apollo";
 import { GET_CITYS } from "./TravelQuery";
 import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
@@ -50,7 +49,6 @@ const TravelPhotoContainer = styled.main`
   position: absolute;
   top: 0;
   left: 25.5%;
-
   @media screen and (max-width: 800px) {
     position: unset;
     left: 50%;
@@ -72,7 +70,6 @@ const PhotoContainer = styled.figure`
   height: 22vw;
   min-width: 140px;
   min-height: 140px;
-
   & img {
     width: 100%;
     height: 100%;

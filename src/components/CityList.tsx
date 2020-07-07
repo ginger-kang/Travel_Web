@@ -90,7 +90,10 @@ export default function CityList({ handleChangeCity }: cProps) {
         오사카
       </Osaka>
       <Kyoto>
-        <div />
+        <div
+          style={{ backgroundImage: `url(${cityImages[3]})` }}
+          onClick={() => handleChangeCity("kyoto")}
+        />
         교토
       </Kyoto>
       <Hukuoka>
