@@ -4,15 +4,14 @@ import { GET_CITYS } from "./TravelQuery";
 import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
 import CityList from "../../components/CityList";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 const TravelContainer = styled.section`
   width: 100%;
   height: 100%;
-  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(0, 0, 0, 0.1);
 `;
 
 interface NavProps {
@@ -27,11 +26,13 @@ const TravelCityNav = styled("nav")<NavProps>`
   top: 0;
   left: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: white;
   overflow: auto;
-  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.02);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   @media screen and (max-width: 800px) {
     position: absolute;
     width: 100%;
@@ -45,7 +46,7 @@ const TravelPhotoContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5vw;
+  margin-top: 3vw;
   margin-left: 8px;
   position: absolute;
   top: 0;
@@ -68,10 +69,10 @@ const GridWrapper = styled.section`
 `;
 
 const PhotoContainer = styled.figure`
-  width: 22vw;
-  height: 22vw;
-  min-width: 140px;
-  min-height: 140px;
+  width: 21vw;
+  height: 21vw;
+  min-width: 155px;
+  min-height: 155px;
 
   & img {
     width: 100%;
@@ -86,8 +87,17 @@ const GetPhotoButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
   margin-top: 30px;
+  margin-bottom: 30px;
+
+  & svg {
+    color: white;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
 `;
 
 // 사진 순서 셔플
@@ -105,17 +115,14 @@ function Travel() {
   const [cityName, setCityName] = useState<string>("tokyo");
   const [photoVariable, setPhotoVariable] = useState<number>(6);
   const [cityIndex, setCityIndex] = useState<number>(0);
-  // const [cityPhotos, setCityPhotos] = useState({});
 
   const { loading, error, data } = useQuery(GET_CITYS, {
     variables: { first: photoVariable },
   });
 
-  useEffect(() => {
-    cmsCityIndex();
-  }, [cityName]);
+  //console.log(cityName, cityIndex);
 
-  const cmsCityIndex = () => {
+  useEffect(() => {
     if (cityName === "tokyo") {
       setCityIndex(0);
     } else if (cityName === "hokkaido") {
@@ -125,7 +132,7 @@ function Travel() {
     } else if (cityName === "kyoto") {
       setCityIndex(3);
     }
-  };
+  }, [cityName]);
 
   if (loading) {
     return <Loading />;
@@ -133,6 +140,7 @@ function Travel() {
   if (error) {
     return <div>error</div>;
   }
+
   let cityPhotos: any = data.citys[cityIndex].photo;
 
   const handleChangeCity = (city: string) => {
@@ -143,24 +151,29 @@ function Travel() {
   return (
     <TravelContainer>
       <TravelCityNav city={cityName}>
-        <CityList handleChangeCity={handleChangeCity} />
+        <CityList
+          handleChangeCity={handleChangeCity}
+          currentIndex={cityIndex}
+        />
       </TravelCityNav>
       <TravelPhotoContainer>
         <GridWrapper>
           {cityPhotos &&
             cityPhotos.map((photo: any) => (
               <PhotoContainer key={photo.id}>
-                <img src={photo.url} alt="photo" />
+                <img src={photo.url} alt="city_photos" />
               </PhotoContainer>
             ))}
         </GridWrapper>
         <GetPhotoButton
           style={{ width: "50px", height: "50px", borderRadius: "100%" }}
           onClick={() => setPhotoVariable(photoVariable + 6)}
-        ></GetPhotoButton>
+        >
+          <TiArrowSortedDown size={30} />
+        </GetPhotoButton>
       </TravelPhotoContainer>
     </TravelContainer>
   );
 }
 
-export default Travel;
+export default React.memo(Travel);

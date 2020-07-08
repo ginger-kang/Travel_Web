@@ -5,7 +5,7 @@ import { GlobalStyle } from "./global-styles";
 import { ApolloProvider } from "react-apollo";
 import client from "./apollo";
 
-const AppContainer = styled.section`
+const AppContainer = styled.div`
   width: 100%;
 `;
 
