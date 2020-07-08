@@ -26,14 +26,13 @@ const CityListContainer = styled("ul")<cityIndexProps>`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    width: 80%;
+    width: 60%;
     height: 50px;
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 5px;
-    padding: 15px;
-    background: white;
+    padding: 10px;
 
     &:hover {
       background: rgba(0, 0, 0, 0.1);

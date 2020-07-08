@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
 import CityList from "../../components/CityList";
 import { TiArrowSortedDown } from "react-icons/ti";
+import TravelPhotos from "./TravelPhotos";
 
 const TravelContainer = styled.section`
   width: 100%;
@@ -31,7 +32,7 @@ const TravelCityNav = styled("nav")<NavProps>`
   align-items: center;
   background: white;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(0, 0, 0, 0.01);
   border-right: 1px solid rgba(0, 0, 0, 0.05);
   @media screen and (max-width: 800px) {
     position: absolute;
@@ -158,12 +159,7 @@ function Travel() {
       </TravelCityNav>
       <TravelPhotoContainer>
         <GridWrapper>
-          {cityPhotos &&
-            cityPhotos.map((photo: any) => (
-              <PhotoContainer key={photo.id}>
-                <img src={photo.url} alt="city_photos" />
-              </PhotoContainer>
-            ))}
+          <TravelPhotos cityPhotos={cityPhotos} />
         </GridWrapper>
         <GetPhotoButton
           style={{ width: "50px", height: "50px", borderRadius: "100%" }}
