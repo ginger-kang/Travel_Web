@@ -69,18 +69,6 @@ const GridWrapper = styled.section`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-const PhotoContainer = styled.figure`
-  width: 21vw;
-  height: 21vw;
-  min-width: 155px;
-  min-height: 155px;
-
-  & img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 const GetPhotoButton = styled.button`
   width: 50px;
   height: 50px;

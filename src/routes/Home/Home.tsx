@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import main from "../../Images/main.jpeg";
+import mainTokyo from "../../Images/HomePhoto/mainOsaka.jpg";
 
 const HomeContainer = styled.section`
   height: 100vh;
@@ -9,6 +9,11 @@ const HomeContainer = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const StartButton = styled.button`
@@ -17,12 +22,15 @@ const StartButton = styled.button`
   min-width: 90px;
   min-height: 30px;
   font-size: 15px;
-  border-radius: 6px;
+  border-radius: 8px;
   color: white;
-  background: #000000;
+  background: rgba(170, 170, 170, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
-    background: #3e3e3e;
+    background: rgba(220, 220, 220, 0.5);
   }
 `;
 
@@ -52,12 +60,17 @@ const HeaderContainer = styled.header`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 17%;
-  color: black;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const MainTitle = styled.h1`
-  font-size: 4vw;
+  font-size: 150px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
 `;
 
 const TravelButtonContainer = styled.section`
@@ -65,31 +78,22 @@ const TravelButtonContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 23%;
+  position: absolute;
+  bottom: 15%;
 `;
 
 function Home() {
   return (
     <HomeContainer>
+      <img src={mainTokyo} alt="main" />
       <HeaderContainer>
-        <MainTitle>Travel</MainTitle>
-        <p>
-          일본 여행을 가고 싶지만 코로나로 인해 가지 못하는 사람들을 위한 웹
-          사이트
-        </p>
+        <MainTitle>SAPPORO</MainTitle>
       </HeaderContainer>
-      <HomeImageContainer>
-        <HomeImageTrailer>
-          <img
-            src={main}
-            alt="japan"
-            style={{ width: "100%", height: "100%" }}
-          />
-        </HomeImageTrailer>
-      </HomeImageContainer>
       <TravelButtonContainer>
         <Link to="/travel">
-          <StartButton>여행시작</StartButton>
+          <StartButton>
+            <span>여행시작</span>
+          </StartButton>
         </Link>
       </TravelButtonContainer>
     </HomeContainer>
