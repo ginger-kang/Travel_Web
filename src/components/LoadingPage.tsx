@@ -11,8 +11,8 @@ const LoadingContainer = styled.section`
 `;
 
 const LoadingIconBox = styled("div")`
-  width: 200px;
-  height: 200px;
+  width: 60px;
+  height: 60px;
   transition: 1s ease;
 
   & img {

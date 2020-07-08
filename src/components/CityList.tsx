@@ -69,7 +69,7 @@ interface cProps {
 }
 
 function CityList({ handleChangeCity, currentIndex }: cProps) {
-  console.log(currentIndex);
+  //console.log(currentIndex);
   const { loading, error, data } = useQuery(GET_CITY_LIST, {
     variables: { first: 1 },
   });
@@ -92,10 +92,10 @@ function CityList({ handleChangeCity, currentIndex }: cProps) {
         <img src={cityImages[currentIndex]} alt="currentcity" />
       </CurrentCityImageContainer>
       <CityListContainer currentIndex={currentIndex}>
-        <Tokyo onClick={() => handleChangeCity("tokyo")}>도쿄</Tokyo>
-        <Hokkaido onClick={() => handleChangeCity("hokkaido")}>삿포로</Hokkaido>
-        <Osaka onClick={() => handleChangeCity("osaka")}>오사카</Osaka>
-        <Kyoto onClick={() => handleChangeCity("kyoto")}>교토</Kyoto>
+        <Tokyo onClick={() => handleChangeCity(0)}>도쿄</Tokyo>
+        <Hokkaido onClick={() => handleChangeCity(1)}>삿포로</Hokkaido>
+        <Osaka onClick={() => handleChangeCity(2)}>오사카</Osaka>
+        <Kyoto onClick={() => handleChangeCity(3)}>교토</Kyoto>
         <Hukuoka>
           <div />
           후쿠오카

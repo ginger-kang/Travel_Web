@@ -15,11 +15,7 @@ const TravelContainer = styled.section`
   align-items: center;
 `;
 
-interface NavProps {
-  city: string;
-}
-
-const TravelCityNav = styled("nav")<NavProps>`
+const TravelCityNav = styled("nav")`
   width: 20%;
   height: 100vh;
   min-width: 200px;
@@ -60,15 +56,6 @@ const TravelPhotoContainer = styled.main`
   }
 `;
 
-const GridWrapper = styled.section`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-`;
-
 const GetPhotoButton = styled.button`
   width: 50px;
   height: 50px;
@@ -101,7 +88,7 @@ const GetPhotoButton = styled.button`
 // };
 
 function Travel() {
-  const [cityName, setCityName] = useState<string>("tokyo");
+  //const [cityName, setCityName] = useState<string>("tokyo");
   const [photoVariable, setPhotoVariable] = useState<number>(6);
   const [cityIndex, setCityIndex] = useState<number>(0);
 
@@ -109,19 +96,9 @@ function Travel() {
     variables: { first: photoVariable },
   });
 
-  //console.log(cityName, cityIndex);
-
   useEffect(() => {
-    if (cityName === "tokyo") {
-      setCityIndex(0);
-    } else if (cityName === "hokkaido") {
-      setCityIndex(1);
-    } else if (cityName === "osaka") {
-      setCityIndex(2);
-    } else if (cityName === "kyoto") {
-      setCityIndex(3);
-    }
-  }, [cityName]);
+    console.log(cityIndex, photoVariable);
+  });
 
   if (loading) {
     return <Loading />;
@@ -132,31 +109,31 @@ function Travel() {
 
   let cityPhotos: any = data.citys[cityIndex].photo;
 
-  const handleChangeCity = (city: string) => {
-    setCityName(city);
+  const handleChangeCity = (city: number) => {
+    setCityIndex(city);
     setPhotoVariable(6);
   };
 
   return (
-    <TravelContainer>
-      <TravelCityNav city={cityName}>
+    <>
+      <TravelCityNav>
         <CityList
           handleChangeCity={handleChangeCity}
           currentIndex={cityIndex}
         />
       </TravelCityNav>
-      <TravelPhotoContainer>
-        <GridWrapper>
+      <TravelContainer>
+        <TravelPhotoContainer>
           <TravelPhotos cityPhotos={cityPhotos} />
-        </GridWrapper>
-        <GetPhotoButton
-          style={{ width: "50px", height: "50px", borderRadius: "100%" }}
-          onClick={() => setPhotoVariable(photoVariable + 6)}
-        >
-          <TiArrowSortedDown size={30} />
-        </GetPhotoButton>
-      </TravelPhotoContainer>
-    </TravelContainer>
+          <GetPhotoButton
+            style={{ width: "50px", height: "50px", borderRadius: "100%" }}
+            onClick={() => setPhotoVariable(photoVariable + 6)}
+          >
+            <TiArrowSortedDown size={30} />
+          </GetPhotoButton>
+        </TravelPhotoContainer>
+      </TravelContainer>
+    </>
   );
 }
 

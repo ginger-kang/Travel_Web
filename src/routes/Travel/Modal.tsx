@@ -9,7 +9,7 @@ const ModalContainer = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 const ModalBox = styled.div`

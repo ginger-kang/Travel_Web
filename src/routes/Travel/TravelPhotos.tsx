@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 
+const GridWrapper = styled.section`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+`;
+
 const PhotoContainer = styled.figure`
   width: 21vw;
   height: 21vw;
@@ -19,7 +28,7 @@ interface tProps {
   cityPhotos: any;
 }
 
-export default function TravelPhotos({ cityPhotos }: tProps) {
+function TravelPhotos({ cityPhotos }: tProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [photoPath, setPhotoPath] = useState<string>("");
 
@@ -34,19 +43,23 @@ export default function TravelPhotos({ cityPhotos }: tProps) {
 
   return (
     <>
-      {cityPhotos &&
-        cityPhotos.map((photo: any) => (
-          <React.Fragment key={photo.id}>
-            <PhotoContainer>
-              <img
-                src={photo.url}
-                alt="city_photos"
-                onClick={() => showModal(photo.url)}
-              />
-            </PhotoContainer>
-            <Modal url={photoPath} showModal={modal} hideModal={hideModal} />
-          </React.Fragment>
-        ))}
+      <GridWrapper>
+        {cityPhotos &&
+          cityPhotos.map((photo: any) => (
+            <React.Fragment key={photo.id}>
+              <PhotoContainer>
+                <img
+                  src={photo.url}
+                  alt="city_photos"
+                  onClick={() => showModal(photo.url)}
+                />
+              </PhotoContainer>
+              <Modal url={photoPath} showModal={modal} hideModal={hideModal} />
+            </React.Fragment>
+          ))}
+      </GridWrapper>
     </>
   );
 }
+
+export default React.memo(TravelPhotos);
