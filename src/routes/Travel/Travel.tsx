@@ -95,10 +95,10 @@ function Travel() {
   const { loading, error, data } = useQuery(GET_CITYS, {
     variables: { first: photoVariable },
   });
-
-  useEffect(() => {
-    console.log(cityIndex, photoVariable);
-  });
+  console.log(cityIndex, photoVariable);
+  // useEffect(() => {
+  //   console.log(cityIndex, photoVariable);
+  // });
 
   if (loading) {
     return <Loading />;

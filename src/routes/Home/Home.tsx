@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import mainTokyo from "../../Images/HomePhoto/mainOsaka.jpg";
+import ImageSlide from "./ImageSlide";
 
 const HomeContainer = styled.section`
   height: 100vh;
@@ -9,11 +9,6 @@ const HomeContainer = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  & img {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 const StartButton = styled.button`
@@ -24,53 +19,14 @@ const StartButton = styled.button`
   font-size: 15px;
   border-radius: 8px;
   color: white;
-  background: rgba(170, 170, 170, 0.6);
+  background: rgba(200, 200, 200, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    background: rgba(220, 220, 220, 0.5);
+    background: rgba(0, 0, 0, 0.2);
   }
-`;
-
-const HomeImageContainer = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60%;
-  padding-top: 10px;
-`;
-
-const HomeImageTrailer = styled.figure`
-  width: 55%;
-  height: 100%;
-  transition: all 1s ease;
-  border-radius: 10px;
-
-  @media screen and (max-width: 800px) {
-    width: 480px;
-    height: 370px;
-  }
-`;
-
-const HeaderContainer = styled.header`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-const MainTitle = styled.h1`
-  font-size: 150px;
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
 `;
 
 const TravelButtonContainer = styled.section`
@@ -85,10 +41,7 @@ const TravelButtonContainer = styled.section`
 function Home() {
   return (
     <HomeContainer>
-      <img src={mainTokyo} alt="main" />
-      <HeaderContainer>
-        <MainTitle>SAPPORO</MainTitle>
-      </HeaderContainer>
+      <ImageSlide />
       <TravelButtonContainer>
         <Link to="/travel">
           <StartButton>
@@ -100,4 +53,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default React.memo(Home);
