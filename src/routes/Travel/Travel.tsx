@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { GET_CITYS } from "./TravelQuery";
 import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
 import CityList from "../../components/CityList";
-import { TiArrowSortedDown } from "react-icons/ti";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import TravelPhotos from "./TravelPhotos";
 
 const TravelContainer = styled.section`
@@ -76,6 +76,27 @@ const GetPhotoButton = styled.button`
   }
 `;
 
+const ScrollUpButton = styled.button`
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+
+  & svg {
+    color: white;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+`;
+
 // 사진 순서 셔플
 // let shuffledData: any = [];
 
@@ -114,6 +135,14 @@ function Travel() {
     setPhotoVariable(6);
   };
 
+  const handleScrollControll = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <TravelCityNav>
@@ -132,6 +161,9 @@ function Travel() {
             <TiArrowSortedDown size={30} />
           </GetPhotoButton>
         </TravelPhotoContainer>
+        <ScrollUpButton onClick={handleScrollControll}>
+          <TiArrowSortedUp size={30} />
+        </ScrollUpButton>
       </TravelContainer>
     </>
   );

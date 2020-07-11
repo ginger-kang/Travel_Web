@@ -85,9 +85,9 @@ const DotContainer = styled("div")<indexProps>`
   & div {
     width: 10px;
     height: 10px;
-    border: 1px solid rgba(100, 100, 100, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 100%;
-    background: rgba(100, 100, 100, 0.2);
+    background: none;
     margin: 0 5px;
   }
 `;
