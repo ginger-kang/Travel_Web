@@ -1,10 +1,10 @@
 import { gql } from "apollo-boost";
 
 export const GET_CITYS = gql`
-  query getCity($first: Int!) {
+  query {
     citys {
       name
-      photo(first: $first) {
+      photo {
         id
         url
       }

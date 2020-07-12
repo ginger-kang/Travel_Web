@@ -9,7 +9,6 @@ import TravelPhotos from "./TravelPhotos";
 
 const TravelContainer = styled.section`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +29,7 @@ const TravelCityNav = styled("nav")`
   overflow: auto;
   background: rgba(0, 0, 0, 0.01);
   border-right: 1px solid rgba(0, 0, 0, 0.05);
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 950px) {
     position: absolute;
     width: 100%;
     height: 150px;
@@ -44,35 +43,16 @@ const TravelPhotoContainer = styled.main`
   justify-content: center;
   align-items: center;
   margin-top: 3vw;
-  margin-left: 8px;
-  position: absolute;
+  margin-left: 2.7vw;
+  position: relative;
   top: 0;
-  left: 25.5%;
+  left: 8.5%;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 950px) {
     position: unset;
     left: 50%;
     margin-top: 180px;
-  }
-`;
-
-const GetPhotoButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.2);
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  & svg {
-    color: white;
-  }
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.5);
+    margin-left: 0px;
   }
 `;
 
@@ -97,6 +77,26 @@ const ScrollUpButton = styled.button`
   }
 `;
 
+const GetPhotoButton = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  & svg {
+    color: white;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+`;
+
 // 사진 순서 셔플
 // let shuffledData: any = [];
 
@@ -109,17 +109,11 @@ const ScrollUpButton = styled.button`
 // };
 
 function Travel() {
-  //const [cityName, setCityName] = useState<string>("tokyo");
-  const [photoVariable, setPhotoVariable] = useState<number>(6);
   const [cityIndex, setCityIndex] = useState<number>(0);
+  const [endIndex, setEndIndex] = useState<number>(6);
 
-  const { loading, error, data } = useQuery(GET_CITYS, {
-    variables: { first: photoVariable },
-  });
-  console.log(cityIndex, photoVariable);
-  // useEffect(() => {
-  //   console.log(cityIndex, photoVariable);
-  // });
+  const { loading, error, data } = useQuery(GET_CITYS);
+  //console.log(cityIndex);
 
   if (loading) {
     return <Loading />;
@@ -128,11 +122,11 @@ function Travel() {
     return <div>error</div>;
   }
 
-  let cityPhotos: any = data.citys[cityIndex].photo;
+  const cityPhotos: any = data.citys[cityIndex].photo.slice(0, endIndex);
 
   const handleChangeCity = (city: number) => {
     setCityIndex(city);
-    setPhotoVariable(6);
+    setEndIndex(6);
   };
 
   const handleScrollControll = () => {
@@ -143,6 +137,11 @@ function Travel() {
     });
   };
 
+  const handleClick = () => {
+    setEndIndex((endIndex) => endIndex + 6);
+    console.log(endIndex);
+  };
+
   return (
     <>
       <TravelCityNav>
@@ -151,19 +150,19 @@ function Travel() {
           currentIndex={cityIndex}
         />
       </TravelCityNav>
+      <ScrollUpButton onClick={handleScrollControll}>
+        <TiArrowSortedUp size={30} />
+      </ScrollUpButton>
       <TravelContainer>
         <TravelPhotoContainer>
           <TravelPhotos cityPhotos={cityPhotos} />
           <GetPhotoButton
             style={{ width: "50px", height: "50px", borderRadius: "100%" }}
-            onClick={() => setPhotoVariable(photoVariable + 6)}
+            onClick={handleClick}
           >
             <TiArrowSortedDown size={30} />
           </GetPhotoButton>
         </TravelPhotoContainer>
-        <ScrollUpButton onClick={handleScrollControll}>
-          <TiArrowSortedUp size={30} />
-        </ScrollUpButton>
       </TravelContainer>
     </>
   );
