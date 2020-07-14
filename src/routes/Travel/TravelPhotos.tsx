@@ -26,9 +26,10 @@ const PhotoContainer = styled.figure`
 
 interface tProps {
   cityPhotos: any;
+  cityName: string;
 }
 
-function TravelPhotos({ cityPhotos }: tProps) {
+function TravelPhotos({ cityPhotos, cityName }: tProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [photoPath, setPhotoPath] = useState<string>("");
 
@@ -56,7 +57,12 @@ function TravelPhotos({ cityPhotos }: tProps) {
                   onClick={() => showModal(photo.url)}
                 />
               </PhotoContainer>
-              <Modal url={photoPath} showModal={modal} hideModal={hideModal} />
+              <Modal
+                url={photoPath}
+                cityName={cityName}
+                showModal={modal}
+                hideModal={hideModal}
+              />
             </React.Fragment>
           ))}
       </GridWrapper>

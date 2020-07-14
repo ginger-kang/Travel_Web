@@ -29,7 +29,8 @@ const MainTitle = styled.h1`
 
 const LeftButtonContainer = styled.div`
   position: absolute;
-  width: 5%;
+  width: 5vw;
+  min-width: 4vw;
   height: 100vh;
   top: 0;
   left: 0;

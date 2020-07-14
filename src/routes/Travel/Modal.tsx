@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
+import { BsArrowsFullscreen } from "react-icons/bs";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 interface isModalOpen {
   showModal: boolean;
@@ -49,27 +51,38 @@ const IconContainer = styled.div`
   width: 30vw;
   height: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
   & svg {
     color: white;
+    margin: 8px;
+  }
+
+  & span {
+    color: white;
+    font-size: 3vw;
+    font-family: "Montserrat", sans-serif;
   }
 `;
 
 interface mProps {
   url: string;
+  cityName: string;
   showModal: boolean;
   hideModal: any;
 }
 
-export default function Modal({ url, showModal, hideModal }: mProps) {
+export default function Modal({ url, cityName, showModal, hideModal }: mProps) {
   return (
     <ModalContainer showModal={showModal}>
       <ModalBox>
         <img src={url} alt="modal" />
         <IconContainer>
-          <GoLocation size={50} />
+          <GoLocation size={45} />
+          <IoMdHeartEmpty size={50} />
+          <BsArrowsFullscreen size={45} />
         </IconContainer>
       </ModalBox>
       <ModalCloseButton>

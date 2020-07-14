@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { GET_CITY_LIST } from "../routes/Travel/TravelQuery";
 import { useQuery } from "@apollo/react-hooks";
 import Loading from "./LoadingPage";
+import { AiOutlineHome } from "react-icons/ai";
 
 interface cityIndexProps {
   currentIndex: number;
@@ -57,6 +59,36 @@ const CurrentCityImageContainer = styled.figure`
   }
 `;
 
+const HomeLinkContainer = styled.div`
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: #ffffff;
+
+    & svg {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    &:hover {
+      background: #f3f3f3;
+
+      & svg {
+        color: black;
+      }
+    }
+  }
+`;
+
 const Tokyo = styled.li``;
 const Hokkaido = styled.li``;
 const Osaka = styled.li``;
@@ -101,6 +133,11 @@ function CityList({ handleChangeCity, currentIndex }: cProps) {
           후쿠오카
         </Hukuoka>
       </CityListContainer>
+      <HomeLinkContainer>
+        <Link to="/">
+          <AiOutlineHome size={30} />
+        </Link>
+      </HomeLinkContainer>
     </React.Fragment>
   );
 }

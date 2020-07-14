@@ -27,7 +27,7 @@ const TravelCityNav = styled("nav")`
   align-items: center;
   background: white;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.01);
+  background: #ffffff;
   border-right: 1px solid rgba(0, 0, 0, 0.05);
   @media screen and (max-width: 950px) {
     position: absolute;
@@ -66,14 +66,14 @@ const ScrollUpButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: #000000;
 
   & svg {
     color: white;
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: #3e3e3e;
   }
 `;
 
@@ -84,7 +84,7 @@ const GetPhotoButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: #000000;
   margin-top: 30px;
   margin-bottom: 30px;
 
@@ -93,7 +93,7 @@ const GetPhotoButton = styled.button`
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: #3e3e3e;
   }
 `;
 
@@ -123,6 +123,9 @@ function Travel() {
   }
 
   const cityPhotos: any = data.citys[cityIndex].photo.slice(0, endIndex);
+  const cityName: string = data.citys[cityIndex].name;
+
+  //console.log(cityName);
 
   const handleChangeCity = (city: number) => {
     setCityIndex(city);
@@ -139,7 +142,7 @@ function Travel() {
 
   const handleClick = () => {
     setEndIndex((endIndex) => endIndex + 6);
-    console.log(endIndex);
+    //console.log(endIndex);
   };
 
   return (
@@ -155,7 +158,7 @@ function Travel() {
       </ScrollUpButton>
       <TravelContainer>
         <TravelPhotoContainer>
-          <TravelPhotos cityPhotos={cityPhotos} />
+          <TravelPhotos cityPhotos={cityPhotos} cityName={cityName} />
           <GetPhotoButton
             style={{ width: "50px", height: "50px", borderRadius: "100%" }}
             onClick={handleClick}
