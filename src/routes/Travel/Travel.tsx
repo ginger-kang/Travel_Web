@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { TiArrowBackOutline } from "react-icons/ti";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { GET_CITYS } from "./TravelQuery";
 import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
 import CityList from "../../components/CityList";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import TravelPhotos from "./TravelPhotos";
+import LikedPhoto from "../../components/LikedPhoto";
 
 const TravelContainer = styled.section`
   width: 100%;
@@ -56,22 +60,59 @@ const TravelPhotoContainer = styled.main`
   }
 `;
 
-const ScrollUpButton = styled.button`
+const HomeLinkContainer = styled.div`
+  width: 100%;
+  height: 5%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: #ffffff;
+
+    & svg {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    &:hover {
+      background: #f3f3f3;
+
+      & svg {
+        color: black;
+      }
+    }
+  }
+
+  & svg {
+    cursor: pointer;
+  }
+`;
+
+interface scrollVisual {
+  isVisual: number;
+}
+
+const ScrollUpButton = styled("button")<scrollVisual>`
   width: 50px;
   height: 50px;
   position: fixed;
   right: 10px;
   bottom: 10px;
   border-radius: 100%;
-  display: flex;
+  display: ${({ isVisual }) => (isVisual >= 12 ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   background: #000000;
-
   & svg {
     color: white;
   }
-
   &:hover {
     background: #3e3e3e;
   }
@@ -87,11 +128,9 @@ const GetPhotoButton = styled.button`
   background: #000000;
   margin-top: 30px;
   margin-bottom: 30px;
-
   & svg {
     color: white;
   }
-
   &:hover {
     background: #3e3e3e;
   }
@@ -111,9 +150,10 @@ const GetPhotoButton = styled.button`
 function Travel() {
   const [cityIndex, setCityIndex] = useState<number>(0);
   const [endIndex, setEndIndex] = useState<number>(6);
+  const [likedPhoto, setLikedPhoto] = useState<any>([]);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
   const { loading, error, data } = useQuery(GET_CITYS);
-  //console.log(cityIndex);
 
   if (loading) {
     return <Loading />;
@@ -124,8 +164,6 @@ function Travel() {
 
   const cityPhotos: any = data.citys[cityIndex].photo.slice(0, endIndex);
   const cityName: string = data.citys[cityIndex].name;
-
-  //console.log(cityName);
 
   const handleChangeCity = (city: number) => {
     setCityIndex(city);
@@ -145,20 +183,42 @@ function Travel() {
     //console.log(endIndex);
   };
 
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <>
       <TravelCityNav>
+        <HomeLinkContainer>
+          <Link to="/">
+            <TiArrowBackOutline size={30} />
+          </Link>
+          {isLiked ? (
+            <IoMdHeart size={30} onClick={handleLikeClick} />
+          ) : (
+            <IoMdHeartEmpty size={30} onClick={handleLikeClick} />
+          )}
+        </HomeLinkContainer>
         <CityList
           handleChangeCity={handleChangeCity}
           currentIndex={cityIndex}
         />
       </TravelCityNav>
-      <ScrollUpButton onClick={handleScrollControll}>
+      <ScrollUpButton onClick={handleScrollControll} isVisual={endIndex}>
         <TiArrowSortedUp size={30} />
       </ScrollUpButton>
       <TravelContainer>
         <TravelPhotoContainer>
-          <TravelPhotos cityPhotos={cityPhotos} cityName={cityName} />
+          {isLiked ? (
+            <LikedPhoto
+              likedPhoto={likedPhoto}
+              cityName={cityName}
+              handleLiked={handleLikeClick}
+            />
+          ) : (
+            <TravelPhotos cityPhotos={cityPhotos} cityName={cityName} />
+          )}
           <GetPhotoButton
             style={{ width: "50px", height: "50px", borderRadius: "100%" }}
             onClick={handleClick}

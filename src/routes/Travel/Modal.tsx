@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
@@ -58,6 +58,7 @@ const IconContainer = styled.div`
   & svg {
     color: white;
     margin: 8px;
+    cursor: pointer;
   }
 
   & span {
@@ -72,16 +73,52 @@ interface mProps {
   cityName: string;
   showModal: boolean;
   hideModal: any;
+  photoId: any;
 }
 
-export default function Modal({ url, cityName, showModal, hideModal }: mProps) {
+export default function Modal({
+  url,
+  cityName,
+  showModal,
+  hideModal,
+  photoId,
+}: mProps) {
+  useEffect(() => {
+    console.log(photoId);
+  }, []);
+
+  const getLocalData = () => {
+    let localData: any = window.localStorage.getItem("id");
+    console.log(localData);
+    if (!localData) {
+      localData = [];
+      window.localStorage.setItem("id", JSON.stringify(localData));
+    } else {
+      localData = JSON.parse(localData);
+    }
+
+    return localData;
+  };
+
+  const handleLike = () => {
+    let likedphoto = getLocalData();
+    const photoIdx = likedphoto.indexOf(photoId);
+
+    if (photoIdx === -1) {
+      likedphoto.push(photoId);
+      window.localStorage.setItem("id", JSON.stringify(likedphoto));
+    }
+
+    console.log(window.localStorage.getItem("id"));
+  };
+
   return (
     <ModalContainer showModal={showModal}>
       <ModalBox>
         <img src={url} alt="modal" />
         <IconContainer>
           <GoLocation size={45} />
-          <IoMdHeartEmpty size={50} />
+          <IoMdHeartEmpty size={50} onClick={handleLike} />
           <BsArrowsFullscreen size={45} />
         </IconContainer>
       </ModalBox>

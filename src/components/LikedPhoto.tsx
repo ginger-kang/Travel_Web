@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "./Modal";
+import Modal from "../routes/Travel/Modal";
 
 const GridWrapper = styled.section`
   width: 100%;
@@ -11,7 +11,7 @@ const GridWrapper = styled.section`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-const PhotoContainer = styled.figure`
+const LikedPhotoContainer = styled.figure`
   width: 21vw;
   height: 21vw;
   min-width: 155px;
@@ -28,22 +28,19 @@ const PhotoContainer = styled.figure`
   }
 `;
 
-interface tProps {
-  cityPhotos: any;
+interface lProps {
+  likedPhoto: any;
+  handleLiked: Function;
   cityName: string;
 }
 
-function TravelPhotos({ cityPhotos, cityName }: tProps) {
+function LikedPhoto({ likedPhoto, handleLiked, cityName }: lProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [photoPath, setPhotoPath] = useState<string>("");
-  const [photoId, setPhotoId] = useState<string>("");
 
-  //console.log(cityPhotos);
-
-  const showModal = (photoProps: string, photoId: string) => {
+  const showModal = (photoProps: any) => {
     setModal(true);
     setPhotoPath(photoProps);
-    setPhotoId(photoId);
   };
 
   const hideModal = () => {
@@ -53,16 +50,16 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
   return (
     <>
       <GridWrapper>
-        {cityPhotos &&
-          cityPhotos.map((photo: any) => (
+        {likedPhoto &&
+          likedPhoto.map((photo: any) => (
             <React.Fragment key={photo.id}>
-              <PhotoContainer>
+              <LikedPhotoContainer>
                 <img
                   src={photo.url}
                   alt="city_photos"
-                  onClick={() => showModal(photo.url, photo.id)}
+                  onClick={() => showModal(photo.url)}
                 />
-              </PhotoContainer>
+              </LikedPhotoContainer>
               <Modal
                 photoId={photo.id}
                 url={photoPath}
@@ -77,4 +74,4 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
   );
 }
 
-export default React.memo(TravelPhotos);
+export default LikedPhoto;
