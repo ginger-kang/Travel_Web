@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
@@ -150,8 +150,22 @@ const GetPhotoButton = styled.button`
 function Travel() {
   const [cityIndex, setCityIndex] = useState<number>(0);
   const [endIndex, setEndIndex] = useState<number>(6);
-  const [likedPhoto, setLikedPhoto] = useState<any>([]);
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [likedPhoto, setLikedPhoto] = useState<any>([]);
+
+  let localData: any = window.localStorage.getItem("id");
+
+  useEffect(() => {
+    //console.log(localData);
+    if (!localData) {
+      localData = [];
+      window.localStorage.setItem("id", JSON.stringify(localData));
+    } else {
+      localData = JSON.parse(localData);
+    }
+
+    setLikedPhoto(localData);
+  }, [localData]);
 
   const { loading, error, data } = useQuery(GET_CITYS);
 
@@ -162,6 +176,14 @@ function Travel() {
     return <div>error</div>;
   }
 
+  let like: any = [];
+  for (let i = 0; i < data.citys.length; i++) {
+    for (let j = 0; j < data.citys[i].photo.length; j++) {
+      if (localData.indexOf(data.citys[i].photo[j].id) >= 0) {
+        like.push(data.citys[i].photo[j]);
+      }
+    }
+  }
   const cityPhotos: any = data.citys[cityIndex].photo.slice(0, endIndex);
   const cityName: string = data.citys[cityIndex].name;
 
@@ -212,7 +234,7 @@ function Travel() {
         <TravelPhotoContainer>
           {isLiked ? (
             <LikedPhoto
-              likedPhoto={likedPhoto}
+              likedPhoto={like}
               cityName={cityName}
               handleLiked={handleLikeClick}
             />

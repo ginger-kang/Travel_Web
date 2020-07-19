@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "../routes/Travel/Modal";
 
@@ -29,14 +29,16 @@ const LikedPhotoContainer = styled.figure`
 `;
 
 interface lProps {
-  likedPhoto: any;
   handleLiked: Function;
   cityName: string;
+  likedPhoto: any;
 }
 
 function LikedPhoto({ likedPhoto, handleLiked, cityName }: lProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [photoPath, setPhotoPath] = useState<string>("");
+
+  console.log(likedPhoto);
 
   const showModal = (photoProps: any) => {
     setModal(true);

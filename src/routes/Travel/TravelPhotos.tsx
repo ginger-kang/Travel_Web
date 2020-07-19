@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 
@@ -64,7 +64,7 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
                 />
               </PhotoContainer>
               <Modal
-                photoId={photo.id}
+                photoId={photoId}
                 url={photoPath}
                 cityName={cityName}
                 showModal={modal}

@@ -83,33 +83,22 @@ export default function Modal({
   hideModal,
   photoId,
 }: mProps) {
-  useEffect(() => {
+  const handleLike = (photoId: any) => {
     console.log(photoId);
-  }, []);
-
-  const getLocalData = () => {
     let localData: any = window.localStorage.getItem("id");
-    console.log(localData);
     if (!localData) {
       localData = [];
       window.localStorage.setItem("id", JSON.stringify(localData));
     } else {
       localData = JSON.parse(localData);
     }
-
-    return localData;
-  };
-
-  const handleLike = () => {
-    let likedphoto = getLocalData();
-    const photoIdx = likedphoto.indexOf(photoId);
+    const photoIdx = localData.indexOf(photoId);
 
     if (photoIdx === -1) {
-      likedphoto.push(photoId);
-      window.localStorage.setItem("id", JSON.stringify(likedphoto));
+      const tmpData = [...localData, photoId];
+      window.localStorage.setItem("id", JSON.stringify(tmpData));
     }
-
-    console.log(window.localStorage.getItem("id"));
+    //console.log(window.localStorage.getItem("id"));
   };
 
   return (
@@ -118,7 +107,7 @@ export default function Modal({
         <img src={url} alt="modal" />
         <IconContainer>
           <GoLocation size={45} />
-          <IoMdHeartEmpty size={50} onClick={handleLike} />
+          <IoMdHeartEmpty size={50} onClick={() => handleLike(photoId)} />
           <BsArrowsFullscreen size={45} />
         </IconContainer>
       </ModalBox>
