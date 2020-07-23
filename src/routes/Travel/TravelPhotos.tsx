@@ -24,7 +24,8 @@ const PhotoContainer = styled.figure`
   }
 
   &:hover {
-    opacity: 0.7;
+    transition: all 0.5s ease;
+    transform: scale(1.02);
   }
 `;
 
@@ -37,13 +38,22 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [photoPath, setPhotoPath] = useState<string>("");
   const [photoId, setPhotoId] = useState<string>("");
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  //console.log(cityPhotos);
+  let localData: any = window.localStorage.getItem("id");
 
   const showModal = (photoProps: string, photoId: string) => {
     setModal(true);
     setPhotoPath(photoProps);
     setPhotoId(photoId);
+
+    const pIndex = localData.indexOf(photoId);
+
+    if (pIndex > -1) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
   };
 
   const hideModal = () => {
@@ -69,6 +79,7 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
                 cityName={cityName}
                 showModal={modal}
                 hideModal={hideModal}
+                isLiked={isLiked}
               />
             </React.Fragment>
           ))}

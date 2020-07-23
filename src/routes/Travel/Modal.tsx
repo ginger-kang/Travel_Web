@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
 import { BsArrowsFullscreen } from "react-icons/bs";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 interface isModalOpen {
   showModal: boolean;
@@ -74,6 +74,7 @@ interface mProps {
   showModal: boolean;
   hideModal: any;
   photoId: any;
+  isLiked: boolean;
 }
 
 export default function Modal({
@@ -82,23 +83,33 @@ export default function Modal({
   showModal,
   hideModal,
   photoId,
+  isLiked,
 }: mProps) {
+  let localData: any = window.localStorage.getItem("id");
+
+  if (!localData) {
+    localData = [];
+    window.localStorage.setItem("id", JSON.stringify(localData));
+  } else {
+    localData = JSON.parse(localData);
+  }
+
   const handleLike = (photoId: any) => {
     console.log(photoId);
-    let localData: any = window.localStorage.getItem("id");
-    if (!localData) {
-      localData = [];
-      window.localStorage.setItem("id", JSON.stringify(localData));
-    } else {
-      localData = JSON.parse(localData);
-    }
     const photoIdx = localData.indexOf(photoId);
 
     if (photoIdx === -1) {
       const tmpData = [...localData, photoId];
       window.localStorage.setItem("id", JSON.stringify(tmpData));
     }
-    //console.log(window.localStorage.getItem("id"));
+    //console.log(window.localStorage.getItem("id"))
+  };
+
+  const handleUnlike = (photoId: any) => {
+    const photoIdx = localData.indexOf(photoId);
+    //console.log(photoIdx);
+    localData.splice(photoIdx, 1);
+    window.localStorage.setItem("id", JSON.stringify(localData));
   };
 
   return (
@@ -107,7 +118,11 @@ export default function Modal({
         <img src={url} alt="modal" />
         <IconContainer>
           <GoLocation size={45} />
-          <IoMdHeartEmpty size={50} onClick={() => handleLike(photoId)} />
+          {isLiked ? (
+            <IoMdHeart size={50} onClick={() => handleUnlike(photoId)} />
+          ) : (
+            <IoMdHeartEmpty size={50} onClick={() => handleLike(photoId)} />
+          )}
           <BsArrowsFullscreen size={45} />
         </IconContainer>
       </ModalBox>

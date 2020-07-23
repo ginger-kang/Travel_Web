@@ -24,7 +24,8 @@ const LikedPhotoContainer = styled.figure`
   }
 
   &:hover {
-    opacity: 0.7;
+    transition: all 0.5s ease;
+    transform: scale(1.02);
   }
 `;
 
@@ -37,12 +38,22 @@ interface lProps {
 function LikedPhoto({ likedPhoto, handleLiked, cityName }: lProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [photoPath, setPhotoPath] = useState<string>("");
+  const [photoId, setPhotoId] = useState<string>("");
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  console.log(likedPhoto);
+  let localData: any = window.localStorage.getItem("id");
 
-  const showModal = (photoProps: any) => {
+  const showModal = (photoProps: any, photoId: string) => {
     setModal(true);
     setPhotoPath(photoProps);
+    setPhotoId(photoId);
+    const pIndex = localData.indexOf(photoId);
+
+    if (pIndex > -1) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
   };
 
   const hideModal = () => {
@@ -59,15 +70,16 @@ function LikedPhoto({ likedPhoto, handleLiked, cityName }: lProps) {
                 <img
                   src={photo.url}
                   alt="city_photos"
-                  onClick={() => showModal(photo.url)}
+                  onClick={() => showModal(photo.url, photo.id)}
                 />
               </LikedPhotoContainer>
               <Modal
-                photoId={photo.id}
+                photoId={photoId}
                 url={photoPath}
                 cityName={cityName}
                 showModal={modal}
                 hideModal={hideModal}
+                isLiked={isLiked}
               />
             </React.Fragment>
           ))}

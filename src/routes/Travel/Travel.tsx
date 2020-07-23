@@ -239,14 +239,16 @@ function Travel() {
               handleLiked={handleLikeClick}
             />
           ) : (
-            <TravelPhotos cityPhotos={cityPhotos} cityName={cityName} />
+            <>
+              <TravelPhotos cityPhotos={cityPhotos} cityName={cityName} />
+              <GetPhotoButton
+                style={{ width: "50px", height: "50px", borderRadius: "100%" }}
+                onClick={handleClick}
+              >
+                <TiArrowSortedDown size={30} />
+              </GetPhotoButton>
+            </>
           )}
-          <GetPhotoButton
-            style={{ width: "50px", height: "50px", borderRadius: "100%" }}
-            onClick={handleClick}
-          >
-            <TiArrowSortedDown size={30} />
-          </GetPhotoButton>
         </TravelPhotoContainer>
       </TravelContainer>
     </>
