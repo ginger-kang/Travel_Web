@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { TiArrowBackOutline } from "react-icons/ti";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { GoMarkGithub } from "react-icons/go";
+import { GrInstagram } from "react-icons/gr";
+import { FiMail, FiHome } from "react-icons/fi";
 import { GET_CITYS } from "./TravelQuery";
 import { useQuery } from "@apollo/react-hooks";
 import Loading from "../../components/LoadingPage";
@@ -27,12 +29,13 @@ const TravelCityNav = styled("nav")`
   left: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background: white;
   overflow: auto;
   background: #ffffff;
   border-right: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 5;
   @media screen and (max-width: 950px) {
     position: absolute;
     width: 100%;
@@ -62,7 +65,7 @@ const TravelPhotoContainer = styled.main`
 
 const HomeLinkContainer = styled.div`
   width: 100%;
-  height: 5%;
+  height: 10%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -72,27 +75,21 @@ const HomeLinkContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    background: #ffffff;
-
-    & svg {
-      color: rgba(0, 0, 0, 0.6);
-    }
-
-    &:hover {
-      background: #f3f3f3;
-
-      & svg {
-        color: black;
-      }
-    }
   }
 
   & svg {
     cursor: pointer;
+    color: black;
   }
+`;
+
+const NavFooter = styled.footer`
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 interface scrollVisual {
@@ -214,18 +211,24 @@ function Travel() {
       <TravelCityNav>
         <HomeLinkContainer>
           <Link to="/">
-            <TiArrowBackOutline size={30} />
+            <FiHome size={30} />
           </Link>
           {isLiked ? (
-            <IoMdHeart size={30} onClick={handleLikeClick} />
+            <FaHeart size={30} onClick={handleLikeClick} />
           ) : (
-            <IoMdHeartEmpty size={30} onClick={handleLikeClick} />
+            <FaRegHeart size={30} onClick={handleLikeClick} />
           )}
         </HomeLinkContainer>
         <CityList
           handleChangeCity={handleChangeCity}
           currentIndex={cityIndex}
+          cityName={cityName}
         />
+        <NavFooter>
+          <GoMarkGithub size={30} />
+          <GrInstagram size={30} />
+          <FiMail size={35} />
+        </NavFooter>
       </TravelCityNav>
       <ScrollUpButton onClick={handleScrollControll} isVisual={endIndex}>
         <TiArrowSortedUp size={30} />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "../routes/Travel/Modal";
 
@@ -56,6 +56,10 @@ function LikedPhoto({ likedPhoto, handleLiked, cityName }: lProps) {
     }
   };
 
+  const handleLikeButton = () => {
+    setIsLiked(!isLiked);
+  };
+
   const hideModal = () => {
     setModal(false);
   };
@@ -80,6 +84,7 @@ function LikedPhoto({ likedPhoto, handleLiked, cityName }: lProps) {
                 showModal={modal}
                 hideModal={hideModal}
                 isLiked={isLiked}
+                handleLikeButton={handleLikeButton}
               />
             </React.Fragment>
           ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
@@ -75,6 +75,7 @@ interface mProps {
   hideModal: any;
   photoId: any;
   isLiked: boolean;
+  handleLikeButton: Function;
 }
 
 export default function Modal({
@@ -84,6 +85,7 @@ export default function Modal({
   hideModal,
   photoId,
   isLiked,
+  handleLikeButton,
 }: mProps) {
   let localData: any = window.localStorage.getItem("id");
 
@@ -102,6 +104,7 @@ export default function Modal({
       const tmpData = [...localData, photoId];
       window.localStorage.setItem("id", JSON.stringify(tmpData));
     }
+    handleLikeButton();
     //console.log(window.localStorage.getItem("id"))
   };
 
@@ -110,6 +113,7 @@ export default function Modal({
     //console.log(photoIdx);
     localData.splice(photoIdx, 1);
     window.localStorage.setItem("id", JSON.stringify(localData));
+    handleLikeButton();
   };
 
   return (
