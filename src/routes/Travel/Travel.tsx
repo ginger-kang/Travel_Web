@@ -13,6 +13,8 @@ import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import TravelPhotos from "./TravelPhotos";
 import LikedPhoto from "../../components/LikedPhoto";
 
+import LikedView from "../../components/LikedView";
+
 const TravelContainer = styled.section`
   width: 100%;
   display: flex;
@@ -219,11 +221,15 @@ function Travel() {
             <FaRegHeart size={30} onClick={handleLikeClick} />
           )}
         </HomeLinkContainer>
-        <CityList
-          handleChangeCity={handleChangeCity}
-          currentIndex={cityIndex}
-          cityName={cityName}
-        />
+        {isLiked ? (
+          <LikedView />
+        ) : (
+          <CityList
+            handleChangeCity={handleChangeCity}
+            currentIndex={cityIndex}
+            cityName={cityName}
+          />
+        )}
         <NavFooter>
           <GoMarkGithub size={30} />
           <GrInstagram size={30} />

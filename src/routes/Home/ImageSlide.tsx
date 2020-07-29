@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import mainTokyo from "../../Images/HomePhoto/mainTokyo.jpg";
-import mainSapporo from "../../Images/HomePhoto/mainSapporo.jpg";
-import mainKyoto from "../../Images/HomePhoto/mainKyoto.jpg";
-import mainOsaka from "../../Images/HomePhoto/mainOsaka.jpg";
+import mainTokyo from "../../Images/HomePhoto/TokyoMain.jpg";
+import mainSapporo from "../../Images/HomePhoto/SapporoMain.jpg";
+import mainKyoto from "../../Images/HomePhoto/KyotoMain.jpg";
+import mainOsaka from "../../Images/HomePhoto/OsakaMain.jpg";
+import mainEnosima from "../../Images/HomePhoto/EnosimaMain.jpg";
+import mainOdaiba from "../../Images/HomePhoto/OdaibaMain.jpg";
+import mainYamanashi from "../../Images/HomePhoto/YamanashiMain.jpg";
 
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -23,7 +26,7 @@ const MainTitle = styled.h1`
   transform: translateX(-50%);
   font-size: 10.5vw;
   color: white;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Merienda One", cursive;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
 `;
 
@@ -96,19 +99,19 @@ const DotContainer = styled("div")<indexProps>`
 export default function ImageSlide() {
   const [imageIndex, setImageIndex] = useState<number>(0);
 
-  const image = [mainTokyo, mainSapporo, mainOsaka, mainKyoto];
-  const name = ["TOKYO", "SAPPORO", "OSAKA", "KYOTO"];
+  const image = [mainTokyo, mainSapporo, mainYamanashi, mainEnosima, mainKyoto];
+  const name = ["TOKYO", "SAPPORO", "YAMANASHI", "ENOSIMA", "KYOTO"];
 
   const imageLeftSlide = () => {
     if (imageIndex === 0) {
-      setImageIndex(3);
+      setImageIndex(4);
     } else {
       setImageIndex((imageIndex) => imageIndex - 1);
     }
   };
 
   const imageRightSlide = () => {
-    if (imageIndex === 3) {
+    if (imageIndex === 4) {
       setImageIndex(0);
     } else {
       setImageIndex((imageIndex) => imageIndex + 1);
@@ -126,6 +129,7 @@ export default function ImageSlide() {
           />
           <MainTitle>{name[imageIndex]}</MainTitle>
           <DotContainer currentIndex={imageIndex}>
+            <div />
             <div />
             <div />
             <div />
