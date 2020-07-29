@@ -15,6 +15,7 @@ import LikedPhoto from "../../components/LikedPhoto";
 
 import LikedView from "../../components/LikedView";
 import NavigationFooter from "../../components/NavigationFooter";
+import ResponsiveNav from "../../components/ResponsiveNav";
 
 const TravelContainer = styled.section`
   width: 100%;
@@ -36,13 +37,16 @@ const TravelCityNav = styled("nav")`
   align-items: center;
   background: white;
   overflow: auto;
-  background: #ffffff;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  background: white;
   z-index: 5;
   @media screen and (max-width: 950px) {
     position: absolute;
     width: 100%;
     height: 150px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-right: 0px;
+    overflow: unset;
   }
 `;
 
@@ -72,7 +76,10 @@ const HomeLinkContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width: 950px) {
+    display: none;
+  }
 
   & a {
     display: flex;
@@ -203,6 +210,7 @@ function Travel() {
   return (
     <>
       <TravelCityNav>
+        <ResponsiveNav handleLikeClick={handleLikeClick} />
         <HomeLinkContainer>
           <Link to="/">
             <FiHome size={30} />

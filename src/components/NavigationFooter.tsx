@@ -12,7 +12,10 @@ const NavFooter = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width: 950px) {
+    display: none;
+  }
 
   & svg {
     cursor: pointer;

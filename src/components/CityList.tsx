@@ -21,19 +21,36 @@ const CurrentCityImageContainer = styled.figure`
   justify-content: center;
   align-items: center;
 
+  @media screen and (max-width: 950px) {
+    flex-direction: row;
+    position: relative;
+  }
+
   & img {
     width: 18vw;
     height: 18vw;
     border-radius: 100%;
+
+    @media screen and (max-width: 950px) {
+      width: 95px;
+      height: 95px;
+    }
   }
   & h1 {
     font-family: "Courgette", cursive;
     margin-top: 15px;
     font-size: 4vw;
+
+    @media screen and (max-width: 950px) {
+      margin-top: 0px;
+      margin-left: 15px;
+      font-size: 44px;
+    }
   }
   & button {
     width: 10vw;
-    height: 3vw;
+    min-width: 100px;
+    height: 40px;
     min-width: 100px;
     min-height: 30px;
     font-size: 15px;
@@ -41,6 +58,33 @@ const CurrentCityImageContainer = styled.figure`
     background: black;
     border-radius: 8px;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: #3e3e3e;
+    }
+
+    @media screen and (max-width: 950px) {
+      border-radius: 100%;
+      width: 35px;
+      min-width: 35px;
+      height: 35px;
+      font-size: 16px;
+      position: absolute;
+      top: -20px;
+      right: -38px;
+      background: #232323;
+
+      &:hover {
+        background: #383838;
+      }
+
+      & span {
+        display: none;
+      }
+    }
   }
 `;
 
@@ -153,7 +197,9 @@ function CityList({ handleChangeCity, currentIndex, cityName }: cProps) {
       <CurrentCityImageContainer>
         <img src={cityImages[currentIndex]} alt="currentcity" />
         <h1>{cityName}</h1>
-        <button onClick={() => setSelectModal(!selectModal)}>도시 선택</button>
+        <button onClick={() => setSelectModal(!selectModal)}>
+          <span>도시 선택</span> ✈️
+        </button>
       </CurrentCityImageContainer>
       <CityListModal selectModal={selectModal}>
         <CityListContainer>
