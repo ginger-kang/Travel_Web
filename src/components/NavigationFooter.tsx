@@ -28,8 +28,18 @@ export default function NavigationFooter() {
 
   return (
     <NavFooter>
-      <GoMarkGithub size={30} />
-      <GrInstagram size={30} />
+      <a
+        onClick={() => window.open("https://github.com/ginger-kang", "_blank")}
+      >
+        <GoMarkGithub size={30} />
+      </a>
+      <a
+        onClick={() =>
+          window.open("https://www.instagram.com/dehhun/", "_blank")
+        }
+      >
+        <GrInstagram size={30} />
+      </a>
       <FiMail size={35} onClick={() => setShowModal(!showModal)} />
       <ContactModal showModal={showModal} handleCloseModal={handleCloseModal} />
     </NavFooter>
