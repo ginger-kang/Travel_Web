@@ -14,6 +14,7 @@ import TravelPhotos from "./TravelPhotos";
 import LikedPhoto from "../../components/LikedPhoto";
 
 import LikedView from "../../components/LikedView";
+import NavigationFooter from "../../components/NavigationFooter";
 
 const TravelContainer = styled.section`
   width: 100%;
@@ -83,15 +84,6 @@ const HomeLinkContainer = styled.div`
     cursor: pointer;
     color: black;
   }
-`;
-
-const NavFooter = styled.footer`
-  width: 100%;
-  height: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 interface scrollVisual {
@@ -230,11 +222,7 @@ function Travel() {
             cityName={cityName}
           />
         )}
-        <NavFooter>
-          <GoMarkGithub size={30} />
-          <GrInstagram size={30} />
-          <FiMail size={35} />
-        </NavFooter>
+        <NavigationFooter />
       </TravelCityNav>
       <ScrollUpButton onClick={handleScrollControll} isVisual={endIndex}>
         <TiArrowSortedUp size={30} />
