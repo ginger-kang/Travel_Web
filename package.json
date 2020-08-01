@@ -12,6 +12,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "apollo-boost": "^0.4.9",
+    "elliptic": "^6.5.3",
     "graphql": "^15.2.0",
     "lodash": "^4.17.19",
     "react": "^16.13.1",

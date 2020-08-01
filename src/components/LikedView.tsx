@@ -29,7 +29,7 @@ export default function LikedView() {
   return (
     <LikedViewBox>
       <FaHeart size={95} />
-      <span>좋아요 누른 사진</span>
+      <span>좋아요 표시한 사진</span>
     </LikedViewBox>
   );
 }

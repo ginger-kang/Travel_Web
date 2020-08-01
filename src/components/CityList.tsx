@@ -106,12 +106,14 @@ const CityListModal = styled("div")<isViewModal>`
 `;
 
 const CityListContainer = styled("ul")`
-  width: 45vw;
+  width: 60vw;
+  height: 40vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   background: none;
+  overflow: auto;
 
   & li {
     display: flex;
