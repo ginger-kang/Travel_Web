@@ -4,13 +4,6 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
-    "@types/jest": "^24.0.0",
-    "@types/lodash": "^4.14.158",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/styled-components": "^5.1.0",
     "apollo-boost": "^0.4.9",
     "elliptic": "^6.5.3",
     "graphql": "^15.2.0",
@@ -22,8 +15,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
-    "styled-reset": "^4.1.6",
-    "typescript": "~3.7.2"
+    "styled-reset": "^4.1.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,5 +37,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.8",
+    "@types/lodash": "^4.14.158",
+    "@types/node": "^14.0.27",
+    "@types/react": "^16.9.44",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.2",
+    "typescript": "^3.9.7"
   }
 }
