@@ -5,6 +5,7 @@ import { GoLocation } from "react-icons/go";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import GoogleMapContainer from "../../components/GoogleMapContainer";
+import Geocoding from "../../components/Geocoding";
 
 interface isModalOpen {
   showModal: boolean;
@@ -69,8 +70,6 @@ const IconContainer = styled.div`
   }
 `;
 
-const uluru = { lat: 50.344, lng: 135.036 };
-
 interface mProps {
   url: string;
   cityName: string;
@@ -121,6 +120,10 @@ export default function Modal({
     handleLikeButton();
   };
 
+  const handleCloseMap = () => {
+    setMapVisible(!mapVisible);
+  };
+
   return (
     <ModalContainer showModal={showModal}>
       <ModalBox>
@@ -138,7 +141,9 @@ export default function Modal({
       <ModalCloseButton>
         <MdClose size={33} onClick={hideModal} />
       </ModalCloseButton>
-      {mapVisible && <GoogleMapContainer location={uluru} />}
+      {mapVisible && (
+        <Geocoding location={cityName} handleCloseMap={handleCloseMap} />
+      )}
     </ModalContainer>
   );
 }
