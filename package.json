@@ -11,6 +11,7 @@
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
+    "react-geocode": "^0.2.1",
     "react-hook-google-maps": "^0.0.3",
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0",
@@ -45,6 +46,7 @@
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
+    "@types/react-geocode": "^0.2.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
     "typescript": "^3.9.7"
