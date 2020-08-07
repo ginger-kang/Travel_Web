@@ -2,6 +2,7 @@ import * as React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Home from "./routes/Home/Home";
 import Travel from "./routes/Travel/Travel";
+import GoogleMapContainer from "./components/GoogleMapContainer";
 
 export default function Router() {
   return (

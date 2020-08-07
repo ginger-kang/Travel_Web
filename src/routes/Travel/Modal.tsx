@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import GoogleMapContainer from "../../components/GoogleMapContainer";
 
 interface isModalOpen {
   showModal: boolean;
@@ -68,6 +69,8 @@ const IconContainer = styled.div`
   }
 `;
 
+const uluru = { lat: 50.344, lng: 135.036 };
+
 interface mProps {
   url: string;
   cityName: string;
@@ -87,6 +90,8 @@ export default function Modal({
   isLiked,
   handleLikeButton,
 }: mProps) {
+  const [mapVisible, setMapVisible] = useState(false);
+
   let localData: any = window.localStorage.getItem("id");
 
   if (!localData) {
@@ -121,7 +126,7 @@ export default function Modal({
       <ModalBox>
         <img src={url} alt="modal" />
         <IconContainer>
-          <GoLocation size={45} />
+          <GoLocation size={45} onClick={() => setMapVisible(!mapVisible)} />
           {isLiked ? (
             <IoMdHeart size={50} onClick={() => handleUnlike(photoId)} />
           ) : (
@@ -133,6 +138,7 @@ export default function Modal({
       <ModalCloseButton>
         <MdClose size={33} onClick={hideModal} />
       </ModalCloseButton>
+      {mapVisible && <GoogleMapContainer location={uluru} />}
     </ModalContainer>
   );
 }
