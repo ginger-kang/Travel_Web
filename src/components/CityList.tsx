@@ -158,8 +158,18 @@ const CityListContainer = styled("ul")`
     }
   }
 
+  @media screen and (max-width: 1220px) {
+    width: 600px;
+    height: 60vh;
+  }
+
+  @media screen and (max-width: 1100px) {
+    width: 500px;
+    height: 60vh;
+  }
+
   @media screen and (max-width: 750px) {
-    width: 90vw;
+    width: 80vw;
     height: 60vh;
   }
 

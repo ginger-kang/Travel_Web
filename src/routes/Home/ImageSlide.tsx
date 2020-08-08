@@ -26,7 +26,7 @@ const MainTitle = styled.h1`
   transform: translateX(-50%);
   font-size: 10.5vw;
   color: white;
-  font-family: "Merienda One", cursive;
+  font-family: "Dancing Script", cursive;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
 
   @media screen and (max-width: 950px) {
