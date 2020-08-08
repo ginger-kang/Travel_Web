@@ -36,6 +36,10 @@ const ModalBox = styled.div`
     width: 50%;
     height: 50%;
   }
+
+  @media screen and (max-width: 430px) {
+    flex-direction: column;
+  }
 `;
 
 const ModalCloseButton = styled.button`
@@ -67,6 +71,10 @@ const IconContainer = styled.div`
     color: white;
     font-size: 3vw;
     font-family: "Montserrat", sans-serif;
+  }
+
+  @media screen and (max-width: 430px) {
+    margin-top: 20px;
   }
 `;
 

@@ -13,10 +13,9 @@ const HomeContainer = styled.section`
 
 const StartButton = styled.button`
   width: 10vw;
-  min-width: 100px;
+  min-width: 130px;
   height: 40px;
-  min-width: 90px;
-  min-height: 30px;
+  min-height: 40px;
   font-size: 15px;
   border-radius: 8px;
   color: white;

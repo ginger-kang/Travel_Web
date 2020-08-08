@@ -9,6 +9,11 @@ const GridWrapper = styled.section`
   grid-column-gap: 1vw;
   grid-row-gap: 1vw;
   grid-template-columns: repeat(3, 1fr);
+
+  @media screen and (max-width: 430px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-row-gap: 4vw;
+  }
 `;
 
 const PhotoContainer = styled.figure`
@@ -26,6 +31,11 @@ const PhotoContainer = styled.figure`
   &:hover {
     transition: all 0.5s ease;
     transform: scale(1.02);
+  }
+
+  @media screen and (max-width: 430px) {
+    min-width: 300px;
+    min-height: 300px;
   }
 `;
 

@@ -116,12 +116,10 @@ export default function ResponsiveNav({ handleLikeClick }: nProps) {
       <RespoNavContainer showNav={showNav}>
         <div>
           <Link to="/">
-            <FiHome size={30} />
             <span>홈으로 가기</span>
           </Link>
         </div>
         <div onClick={() => handleLikedClick()}>
-          <FaRegHeart size={30} />
           <span>좋아요 표시한 사진</span>
         </div>
         <NavFooter>

@@ -106,7 +106,7 @@ const CityListModal = styled("div")<isViewModal>`
 `;
 
 const CityListContainer = styled("ul")`
-  width: 60vw;
+  width: 700px;
   height: 40vw;
   display: flex;
   justify-content: center;
@@ -121,15 +121,13 @@ const CityListContainer = styled("ul")`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    width: 13vw;
-    height: 13vw;
-    min-width: 123px;
-    min-height: 123px;
+    width: 11vw;
+    height: 11vw;
+    min-width: 110px;
+    min-height: 110px;
     cursor: pointer;
-    padding: 10px;
     background: none;
     color: white;
-    margin-bottom: 20px;
 
     & img {
       width: 90%;
@@ -148,6 +146,26 @@ const CityListContainer = styled("ul")`
       transition: all 0.3s ease;
       transform: scale(1.05);
     }
+
+    @media screen and (max-width: 780px) {
+      min-width: 110px;
+      min-height: 110px;
+    }
+
+    @media screen and (max-width: 430px) {
+      min-width: 110px;
+      min-height: 110px;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    width: 90vw;
+    height: 60vh;
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 100vw;
+    height: 65vh;
   }
 `;
 

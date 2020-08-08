@@ -5,15 +5,19 @@ import { GOOGLE_API_KEY } from "../config";
 
 const MapCloseButton = styled.button`
   background: black;
-  width: 100px;
+  width: 140px;
   height: 40px;
   position: absolute;
   left: 50%;
   bottom: 10px;
-  padding: 15px;
+  padding: 5px;
   border-radius: 8px;
   color: white;
   transform: translateX(-50%);
+
+  &:hover {
+    background: #3e3e3e;
+  }
 `;
 
 interface mProps {
@@ -26,7 +30,7 @@ export default function GoogleMapContainer({
   handleCloseMap,
 }: mProps) {
   const { ref, map, google } = useGoogleMaps(GOOGLE_API_KEY, {
-    zoom: 10,
+    zoom: 13,
     center: location,
   });
 

@@ -28,12 +28,16 @@ const MainTitle = styled.h1`
   color: white;
   font-family: "Merienda One", cursive;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+
+  @media screen and (max-width: 950px) {
+    font-size: 100px;
+  }
 `;
 
 const LeftButtonContainer = styled.div`
   position: absolute;
   width: 5vw;
-  min-width: 4vw;
+  min-width: 70px;
   height: 100vh;
   top: 0;
   left: 0;
@@ -53,8 +57,9 @@ const LeftButtonContainer = styled.div`
 
 const RightButtonContainer = styled.div`
   position: absolute;
-  width: 5%;
+  width: 5vw;
   height: 100vh;
+  min-width: 70px;
   top: 0;
   right: 0;
   display: flex;
