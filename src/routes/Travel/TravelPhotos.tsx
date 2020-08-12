@@ -49,13 +49,19 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
   const [photoPath, setPhotoPath] = useState<string>("");
   const [photoId, setPhotoId] = useState<string>("");
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [location, setLocation] = useState<string>("");
 
   let localData: any = window.localStorage.getItem("id");
 
-  const showModal = (photoProps: string, photoId: string) => {
+  const showModal = (
+    photoProps: string,
+    photoId: string,
+    photoFileName: string
+  ) => {
     setModal(true);
     setPhotoPath(photoProps);
     setPhotoId(photoId);
+    setLocation(photoFileName);
 
     const pIndex = localData.indexOf(photoId);
 
@@ -84,12 +90,13 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
                 <img
                   src={photo.url}
                   alt="city_photos"
-                  onClick={() => showModal(photo.url, photo.id)}
+                  onClick={() => showModal(photo.url, photo.id, photo.fileName)}
                 />
               </PhotoContainer>
               <Modal
                 photoId={photoId}
                 url={photoPath}
+                location={location}
                 cityName={cityName}
                 showModal={modal}
                 hideModal={hideModal}

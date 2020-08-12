@@ -84,6 +84,7 @@ interface mProps {
   showModal: boolean;
   hideModal: any;
   photoId: any;
+  location: any;
   isLiked: boolean;
   handleLikeButton: Function;
 }
@@ -94,6 +95,7 @@ export default function Modal({
   showModal,
   hideModal,
   photoId,
+  location,
   isLiked,
   handleLikeButton,
 }: mProps) {

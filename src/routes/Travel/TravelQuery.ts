@@ -7,6 +7,7 @@ export const GET_CITYS = gql`
       photo {
         id
         url
+        fileName
       }
     }
   }
