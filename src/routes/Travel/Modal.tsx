@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
@@ -100,6 +100,19 @@ export default function Modal({
   handleLikeButton,
 }: mProps) {
   const [mapVisible, setMapVisible] = useState(false);
+  const [geoLocation, setGeoLocation] = useState("");
+
+  useEffect(() => {
+    const start = location.indexOf("_");
+    const end = location.indexOf(".");
+    if (start === -1) {
+      setGeoLocation(location.substring(0, end));
+    } else {
+      setGeoLocation(location.substring(start + 1, end));
+    }
+    //console.log(geoLocation);
+    //console.log(location);
+  });
 
   let localData: any = window.localStorage.getItem("id");
 
@@ -111,7 +124,7 @@ export default function Modal({
   }
 
   const handleLike = (photoId: any) => {
-    console.log(photoId);
+    //console.log(photoId);
     const photoIdx = localData.indexOf(photoId);
 
     if (photoIdx === -1) {
@@ -152,7 +165,7 @@ export default function Modal({
         <MdClose size={33} onClick={hideModal} />
       </ModalCloseButton>
       {mapVisible && (
-        <Geocoding location={cityName} handleCloseMap={handleCloseMap} />
+        <Geocoding location={geoLocation} handleCloseMap={handleCloseMap} />
       )}
     </ModalContainer>
   );

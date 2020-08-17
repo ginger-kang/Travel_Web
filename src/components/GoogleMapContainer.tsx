@@ -30,7 +30,7 @@ export default function GoogleMapContainer({
   handleCloseMap,
 }: mProps) {
   const { ref, map, google } = useGoogleMaps(GOOGLE_API_KEY, {
-    zoom: 13,
+    zoom: 15,
     center: location,
   });
 

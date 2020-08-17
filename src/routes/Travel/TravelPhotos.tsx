@@ -62,6 +62,7 @@ function TravelPhotos({ cityPhotos, cityName }: tProps) {
     setPhotoPath(photoProps);
     setPhotoId(photoId);
     setLocation(photoFileName);
+    //console.log(photoFileName);
 
     const pIndex = localData.indexOf(photoId);
 
