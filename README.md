@@ -5,6 +5,7 @@
 > Frontend web service for people who want to travel but cannot go because of COVID19😈
 
 ## 🚀 Travel with this service
+
 <div align="center">
 <img width="700" src="https://user-images.githubusercontent.com/62840502/92744363-627d4700-f3bc-11ea-8128-21584287089a.png">
 </div>
@@ -26,3 +27,19 @@
 - GraphCMS
 - Typescript
 - Styled-Components
+
+## Installation
+
+```
+$ yarn
+```
+
+## Start
+
+```
+$ yarn start
+```
+
+## ✨ Website
+
+[frontravel](https://frontravel.netlify.app/)
